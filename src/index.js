@@ -1,7 +1,7 @@
 const express = require('express');
 const connectDB = require('./config/database')
 const User = require('./models/user')
-const {validateSignUp} = require('./utils/SignUpValidation')
+const { validateSignUp } = require('./utils/SignUpValidation')
 connectDB()
 
 const app = express();

@@ -1,6 +1,6 @@
 const validator = require('validator');
 
-export const validateSignUp = (data) => {
+ const validateSignUp = (data) => {
     if (data.email && !validator.isEmail(data.email)) {
         throw new Error("Invalid email format");
     }
@@ -9,3 +9,5 @@ export const validateSignUp = (data) => {
     }
 
 }
+
+exports.validateSignUp = validateSignUp
