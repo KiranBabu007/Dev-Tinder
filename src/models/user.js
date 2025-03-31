@@ -15,7 +15,7 @@ const userSchema = new Schema(
     },
     email: {
       type: String,
-      required: true,
+      required: true, 
       unique: true, // Ensure uniqueness at the database level
       lowercase: true,
       trim: true,

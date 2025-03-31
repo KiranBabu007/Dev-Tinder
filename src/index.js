@@ -1,6 +1,7 @@
 const express = require('express');
 const connectDB = require('./config/database')
 const User = require('./models/user')
+const {validateSignUp} = require('./utils/SignUpValidation')
 connectDB()
 
 const app = express();
@@ -13,6 +14,7 @@ app.post('/signup', async(req, res) => {
     console.log('Created user object:', user) // Debug user object
 
     try {
+        validateSignUp(user)
         const savedUser = await user.save()
         console.log("Saved user:", savedUser) // Debug saved user
         res.status(201).json(savedUser)
