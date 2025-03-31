@@ -9,6 +9,29 @@ const app = express();
 
 app.use(express.json())
 
+app.post('/login', async(req, res) => {
+
+    try{
+        const {password,email} =req.body
+
+        const user=await User.findOne({email})
+        if(!user){
+            throw new Error("Invalid credentials")
+        }
+        const isValid=bcrypt.compareSync(password, user.password)
+        if(isValid){
+            res.send("Login Successfull")
+        }
+        else{
+            throw new Error("Invalid credentials")
+        }
+    }
+    catch(err){
+        console.log(err)
+        return res.status(400).json({error: err.message})
+    }
+})
+
 app.post('/signup', async(req, res) => {
     
 
