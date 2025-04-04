@@ -3,11 +3,20 @@ const connectDB = require('./config/database')
 const User = require('./models/user')
 const { validateSignUp } = require('./utils/SignUpValidation')
 const bcrypt = require('bcrypt')
+const cookieParser = require('cookie-parser')
 connectDB()
 
 const app = express();
 
 app.use(express.json())
+app.use(cookieParser())
+
+app.get('/profile',(req,res)=>{
+    const cookies = req.cookies
+
+    console.log(cookies)
+    res.send("Profile page")
+})
 
 app.post('/login', async(req, res) => {
 
@@ -20,6 +29,8 @@ app.post('/login', async(req, res) => {
         }
         const isValid=bcrypt.compareSync(password, user.password)
         if(isValid){
+
+            res.cookie('token','ncsosjdfasbdcajshbdcudfowifwwefwe')
             res.send("Login Successfull")
         }
         else{
