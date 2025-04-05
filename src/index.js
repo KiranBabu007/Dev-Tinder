@@ -4,6 +4,7 @@ const User = require('./models/user')
 const { validateSignUp } = require('./utils/SignUpValidation')
 const bcrypt = require('bcrypt')
 const cookieParser = require('cookie-parser')
+const jwt=require('jsonwebtoken')
 connectDB()
 
 const app = express();
