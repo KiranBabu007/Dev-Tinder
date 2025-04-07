@@ -5,6 +5,7 @@ const { validateSignUp } = require('./utils/SignUpValidation')
 const bcrypt = require('bcrypt')
 const cookieParser = require('cookie-parser')
 const jwt=require('jsonwebtoken')
+const userAuth = require('./middleware/auth')
 connectDB()
 
 const app = express();
@@ -12,14 +13,12 @@ const app = express();
 app.use(express.json())
 app.use(cookieParser())
 
-app.get('/profile',(req,res)=>{
-    const cookies = req.cookies
-
-    console.log(cookies)
-    res.send("Profile page")
+app.get('/profile',userAuth,async(req,res)=>{
+    
+    res.send(req.user)
 })
 
-app.post('/login', async(req, res) => {
+app.post('/login',async(req, res) => {
 
     try{
         const {password,email} =req.body
@@ -30,8 +29,10 @@ app.post('/login', async(req, res) => {
         }
         const isValid=bcrypt.compareSync(password, user.password)
         if(isValid){
+            const _id=user._id
+            const token=jwt.sign({_id:_id},"Kiran@123#")
 
-            res.cookie('token','ncsosjdfasbdcajshbdcudfowifwwefwe')
+            res.cookie('token',token)
             res.send("Login Successfull")
         }
         else{
