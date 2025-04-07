@@ -5,9 +5,10 @@ const { validateSignUp } = require('./utils/SignUpValidation')
 const bcrypt = require('bcrypt')
 const cookieParser = require('cookie-parser')
 const jwt=require('jsonwebtoken')
-const userAuth = require('./middleware/auth')
+
 connectDB()
 
+const { userAuth } = require('./middleware/auth')
 const app = express();
 
 app.use(express.json())
