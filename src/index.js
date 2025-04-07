@@ -71,16 +71,7 @@ app.post('/signup', async(req, res) => {
     }
 })
 
-app.get('/users', async(req, res) => {
-    const userEmail = req.body.email
-    try {
-        const users = await User.find({email: userEmail})
-        res.json(users)
-    } catch(err) {
-        console.log(err)
-        res.status(404).json({ error: "User not found" })
-    }
-})
+
 
 app.listen(3000, () => {
     console.log('Server started at port 3000');
