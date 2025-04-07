@@ -13,9 +13,9 @@ const app = express();
 app.use(express.json())
 app.use(cookieParser())
 
-app.get('/profile',userAuth,async(req,res)=>{
-    
-    res.send(req.user)
+app.get('/profile', userAuth, async (req, res) => {
+    const user=req.user
+    res.send(user)
 })
 
 app.post('/login',async(req, res) => {
