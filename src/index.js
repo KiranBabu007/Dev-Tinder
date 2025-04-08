@@ -28,11 +28,9 @@ app.post('/login',async(req, res) => {
         if(!user){
             throw new Error("Invalid credentials")
         }
-        const isValid=bcrypt.compareSync(password, user.password)
+        const isValid=user.ValidatePassword(password)
         if(isValid){
-            const _id=user._id
-            const token=jwt.sign({_id:_id},"Kiran@123#")
-
+            const token=user.jwtToken()
             res.cookie('token',token)
             res.send("Login Successfull")
         }
