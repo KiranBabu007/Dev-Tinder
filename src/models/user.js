@@ -50,10 +50,9 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.methods.jwtToken = async function() {
-  const user=this
+userSchema.methods.jwtToken = function() {
  
-  const token = jwt.sign({_id:user._id},"Kiran@123#")
+  const token = jwt.sign({_id:this._id},"Kiran@123#")
 
   return token
 
@@ -64,7 +63,6 @@ userSchema.methods.ValidatePassword = async function(password) {
   const isValid=await bcrypt.compare(password, user.password)
   return isValid
 }
-
 
 
 const User = mongoose.model("User", userSchema);
