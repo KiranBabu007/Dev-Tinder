@@ -17,6 +17,8 @@ const connectionSchema = new Schema({
     }
 })
 
+connectionSchema.index({fromId:1,toId:1})
+
 const Connection = mongoose.model("Connection",connectionSchema);
 
 module.exports = Connection;
