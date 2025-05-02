@@ -55,7 +55,7 @@ requestRouter.post('/request/send/:status/:toId',userAuth,async(req,res)=>{
                 throw new Error("Invalid Status")
             }
 
-            const connection = await User.findById({
+            const connection = await Connection.findById({
                 _id:reqId,
                 toId:loggedInUser._id,
                 status:"interested"
