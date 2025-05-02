@@ -43,4 +43,20 @@ requestRouter.post('/request/send/:status/:toId',userAuth,async(req,res)=>{
 
     })
 
+    requestRouter.post('/request/review/:status/:reqId',userAuth,async(req,res)=>{
+        
+        try{
+            const loggedInUser=req.user
+            const { status,reqId } = req.params
+
+            const allowed = ["accepted","rejected"]
+
+
+        }
+        catch(err){
+            console.log(err)
+            return res.status(400).json({error: err.message})
+        }
+    })
+
     module.exports=requestRouter
