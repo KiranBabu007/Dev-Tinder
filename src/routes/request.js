@@ -51,6 +51,26 @@ requestRouter.post('/request/send/:status/:toId',userAuth,async(req,res)=>{
 
             const allowed = ["accepted","rejected"]
 
+            if(!allowed.includes(status)){
+                throw new Error("Invalid Status")
+            }
+
+            const connection = await User.findById({
+                _id:reqId,
+                toId:loggedInUser._id,
+                status:"interested"
+            })
+
+            if(!connection){
+                throw new Error("Invalid request id")
+            }
+
+            connection.status=status
+
+           const data=await connection.save()
+           console.log(data)
+            res.status(200).json({message:"Request updated successfully"})
+
 
         }
         catch(err){
