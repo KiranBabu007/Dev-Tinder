@@ -5,7 +5,8 @@ const { Schema } = mongoose;
 const connectionSchema = new Schema({
     fromId:{
         type:Schema.Types.ObjectId,
-        required:true
+        required:true,
+        ref:"User"
     },
     toId:{
         type:Schema.Types.ObjectId,
@@ -15,6 +16,7 @@ const connectionSchema = new Schema({
         type:String,
         enum:["interested","ignored","accepted","rejected"]
     }
+    
 })
 
 connectionSchema.index({fromId:1,toId:1})

@@ -26,6 +26,5 @@ const userAuth = async(req,res,next)=>{
  
 }
 
-module.exports={
+module.exports=
     userAuth
-}
